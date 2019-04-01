@@ -41,21 +41,37 @@
 --
 -- Now, the only terms that need to be mentioned are the ones that cause
 -- a compile-time error due to the types not matching up.
-module RecordWrangler where
+module RecordWrangler
+    ( -- * The Wranglin One
+      wrangle
+      -- * The Options For Wranglin
+    , WrangleOpts
+    , defWrangleOpts
+    , fieldLabelModifier
+    , constructorNameModifier
+    , typeNameModifier
+    ) where
 
 import           Data.Traversable
 import           Language.Haskell.TH
 import           Language.Haskell.TH.Quote
 
--- | The options for wrangling records.
+-- | The options for wrangling records. The constructor is hidden so that
+-- we can add new features and powers without breaking your code!
 data WrangleOpts = WrangleOpts
     { fieldLabelModifier :: String -> String
     -- ^ This function will be applied to every field label in the provided
     -- record.
+    --
+    -- @since 0.1.0.0
     , typeNameModifier :: String -> String
     -- ^ This function will be applied to the type name.
+    --
+    -- @since 0.1.0.0
     , constructorModifier :: String -> String
     -- ^ This function will be applied to the constructor name.
+    --
+    -- @since 0.1.0.0
     }
 
 -- | This is the default set of 'WrangleOpts'. It affixes a @'@ character to
@@ -65,6 +81,8 @@ data WrangleOpts = WrangleOpts
 -- @
 -- wrangle ''Record defWrangleOpts { fieldLabelModifier = ('_' :) }
 -- @
+--
+-- @since 0.1.0.0
 defWrangleOpts :: WrangleOpts
 defWrangleOpts = WrangleOpts
     { fieldLabelModifier = (++ "'")
@@ -94,6 +112,8 @@ defWrangleOpts = WrangleOpts
 -- >
 -- > wranglePersonToPowerfulPerson :: Person -> PowerfulPerson
 -- > wranglePersonToPowerfulPerson (Person x0 x1) = Person' x0 x1
+--
+-- @since 0.1.0.0
 wrangle :: Name -> WrangleOpts -> DecsQ
 wrangle tyName WrangleOpts {..} = do
     TyConI theDec <- reify tyName
