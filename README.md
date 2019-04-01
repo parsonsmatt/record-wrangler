@@ -1,6 +1,6 @@
 # record-wrangler
 
-[![Build Status](https://travis-ci.org/parsonsmatt/record-wrangler.svg?branch=master)](https://travis-ci.org/parsonsmatt/record-wrangler)
+[![Build Status](https://travis-ci.org/lumihq/record-wrangler.svg?branch=master)](https://travis-ci.org/lumihq/record-wrangler)
 
 This package uses `TemplateHaskell` to alter records in ways that may be convenient for you.
 
