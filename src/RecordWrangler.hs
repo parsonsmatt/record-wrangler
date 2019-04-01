@@ -9,7 +9,7 @@
 -- use of a naming scheme convention allows one to write the conversion function
 -- as:
 --
--- > dexterData (Entity id Old.Record{..}) RecordStats{..} =
+-- > convertData (Entity id Old.Record{..}) RecordStats{..} =
 -- >   Entity (coerce id) New.Record
 -- >     { ..
 -- >     -- Some fields need massaging
@@ -30,7 +30,7 @@
 -- to have different field labels. It also creates a conversion function. Now,
 -- we can write (with @ViewPatterns@):
 --
--- > dexterData
+-- > convertData
 -- >   (Entity id Old.Record{..})
 -- >   (wrangleRecordStatsToRecordStats' -> RecordStats'{..})
 -- >  =
