@@ -1,4 +1,7 @@
 {-# LANGUAGE TemplateHaskell #-}
+{-# LANGUAGE ViewPatterns #-}
+{-# LANGUAGE RecordWildCards #-}
+
 import RecordWrangler
 
 data Person = Person { name :: String, age :: Int }
@@ -14,5 +17,12 @@ personWrangled = Person'
 converted :: Person -> Person'
 converted = wranglePersonToPerson'
 
+funWithViewPatterns :: Person -> IO ()
+funWithViewPatterns (wranglePersonToPerson' -> Person'{..}) = do
+    putStrLn personName'
+    print personAge'
+
 main :: IO ()
-main = putStrLn "The test suite for record-wrangler only requires compilation"
+main = do
+    putStrLn "The test suite for record-wrangler only requires compilation"
+    putStrLn "It demonstrates usage of the record-wrangler library"
