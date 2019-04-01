@@ -48,7 +48,7 @@ module RecordWrangler
     , WrangleOpts
     , defWrangleOpts
     , fieldLabelModifier
-    , constructorNameModifier
+    , constructorModifier
     , typeNameModifier
     ) where
 
