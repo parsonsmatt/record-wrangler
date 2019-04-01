@@ -19,8 +19,8 @@ converted = wranglePersonToPerson'
 
 funWithViewPatterns :: Person -> IO ()
 funWithViewPatterns (wranglePersonToPerson' -> Person'{..}) = do
-    putStrLn personName'
-    print personAge'
+    putStrLn name'
+    print age'
 
 main :: IO ()
 main = do
