@@ -1,4 +1,5 @@
 {-# LANGUAGE AllowAmbiguousTypes #-}
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE TypeOperators #-}
 {-# LANGUAGE DataKinds #-}
 {-# LANGUAGE UndecidableInstances #-}
@@ -236,7 +237,11 @@ wrangle tyName WrangleOpts {..} = do
         newTypes = map (\(_, _, t) -> t) newFields
 
     let mkPatternFrom (recName, _) vars =
+#if MIN_VERSION_template_haskell(2,18,0)    
+            ConP recName [] $ map VarP vars
+#else
             ConP recName $ map VarP vars
+#endif
         mkVariableNames (_, fields) =
             for fields $ \_ -> newName "x"
         mkBodyFrom (recName, _) vars =
